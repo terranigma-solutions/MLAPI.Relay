@@ -32,8 +32,8 @@
       "AcksType": 1,
       "InitialBandwidth": 0,
       "BandwidthPeakFactor": 2.0,
-      "WebSocketReceiveBufferMaxSize": 8192,
-      "UdpSocketReceiveBufferMaxSize": 8192,
+      "WebSocketReceiveBufferMaxSize": 0,
+      "UdpSocketReceiveBufferMaxSize": 0,
       "SSLCertFilePath": null,
       "SSLPrivateKeyFilePath": null,
       "SSLCAFilePath": null
