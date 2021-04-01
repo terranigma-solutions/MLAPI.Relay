@@ -15,7 +15,7 @@ namespace MLAPI.Relay
     {
         public static Transport Transport;
         public static readonly List<Room> Rooms = new List<Room>();
-        public static readonly Dictionary<EndPoint, Room> ServerAddressToRoom = new Dictionary<EndPoint, Room>();
+        public static readonly Dictionary<IPEndPoint, Room> ServerAddressToRoom = new Dictionary<IPEndPoint, Room>();
         public static byte DEFAULT_CHANNEL_BYTE = 0;
 
         public static byte[] MESSAGE_BUFFER;
@@ -345,9 +345,19 @@ namespace MLAPI.Relay
                                         // Parse address
                                         IPAddress address = new IPAddress(ADDRESS_BYTE_ARRAY);
 
-                                        // Create endpoint
                                         IPEndPoint endpoint = new IPEndPoint(address, port);
-
+                                        
+                                        foreach (var item in ServerAddressToRoom)
+                                        {
+                                            var serverIp = item.Key.Address;
+                                            if (address.Equals(serverIp))
+                                            {
+                                                endpoint = new IPEndPoint(address, item.Key.Port);
+                                                break;
+                                            }
+                                        }
+                                        
+                                        // Create endpoint
                                         if (Config.EnableRuntimeMetaLogging) Console.WriteLine("[INFO] Connection requested to address " + endpoint);
 
                                         if (ServerAddressToRoom.ContainsKey(endpoint))
