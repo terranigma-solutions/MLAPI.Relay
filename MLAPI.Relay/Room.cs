@@ -50,7 +50,7 @@ namespace MLAPI.Relay
                 // Delete the room
                 Program.Rooms.Remove(this);
 
-                foreach (EndPoint key in Program.ServerAddressToRoom.Keys)
+                foreach (IPEndPoint key in Program.ServerAddressToRoom.Keys)
                 {
                     if (Program.ServerAddressToRoom[key] == this)
                     {
